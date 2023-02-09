@@ -1,2 +1,13 @@
 sequenceDiagram
-    User -> Scooter: Interract
+    User -> App: Registered
+    User -> App: Login
+    User -> App: Logout
+    App -> User: Register
+    App -> User: loginUser
+    App -> User: logoutUser
+    App -> User: RegisterUser
+    App -> Scooter: DockScooter
+    App -> Scooter: rentScooter
+    App -> Scooter: createScooter
+    Scooter -> App: rent
+    Scooter -> App: dock
