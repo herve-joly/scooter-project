@@ -1,68 +1,70 @@
 const Scooter = require("../src/Scooter");
 const User = require("../src/User");
 
-describe("Testing Scooter Class", () => {
-  const scooter1 = new Scooter("Northampton");
-  const user3 = ("John", "passtest", 40);
-  const user4 = ("Steven", "passtest2", 33);
-
-  describe("Constructor", () => {
-    //typeof scooter === object
-    test("if is an object", () => {
-      // edit this to be a real test!
-      expect(typeof scooter1).toBe("object");
-    });
-    //Test Scooter properties
-    test("test user", () => {
-      expect(scooter1.user).toBe(null);
-    });
-    test("test stations", () => {
-      expect(scooter1.station).toBe("Northampton");
-    });
-    test("test charge", () => {
-      expect(scooter1.charge).toBe(100);
-    });
-    test("test if scooter is broken", () => {
-      expect(scooter1.isBroken).toBe(false);
-    });
-    //test serial
-    test("test serial", () => {
-      expect(this.serial).toBe(this.nextSerial);
-    });
-    //test nextserial
-    // test("test nextserial", () => {
-    //   expect(this.nextSerial).toBe(1);
-    // });
+describe("Constructor", () => {
+  //typeof scooter === object
+  test("if is an object", () => {
+    const scooter1 = new Scooter("Northampton");
+    // edit this to be a real test!
+    expect(typeof scooter1).toBe("object");
   });
-  //Method tests
-  describe("Method", () => {
-    //test rent
-    test("test if rent", () => {
-      scooter1.charge = 60;
-      scooter1.isBroken = false;
+  //Test Scooter properties
+  test("test user", () => {
+    const scooter2 = new Scooter("Norwich");
+    expect(scooter2.user).toBe(null);
+  });
+  test("test stations", () => {
+    const scooter1 = new Scooter("Northampton");
+    expect(scooter1.station).toBe("Northampton");
+  });
+  test("test charge", () => {
+    const scooter2 = new Scooter("Norwich");
+    expect(scooter2.charge).toBe(100);
+  });
+  test("test if scooter is broken", () => {
+    const scooter1 = new Scooter("Northampton");
+    expect(scooter1.isBroken).toBe(false);
+  });
+  //test serial
+
+  //test nextserial
+});
+//Method tests
+describe("Method", () => {
+  //test rent
+  test("test if rent", () => {
+    const scooter1 = new Scooter("Northampton");
+    scooter1.rent();
+    expect(scooter1.station).toBe(null);
+  });
+  test("testing rent()", () => {
+    const scooter1 = new Scooter("Northampton");
+    scooter1.rent();
+    expect(scooter1.user).toEqual(User);
+  });
+  //requestRepair method
+  test("throw error if broken", () => {
+    const scooter2 = new Scooter("Norwich");
+    scooter2.isBroken = true;
+    expect(() => {
+      scooter2.rent();
+    }).toThrowError(new Error("scooter need repair"));
+  });
+  //charge method
+  test("throw error if need charge", () => {
+    const scooter1 = new Scooter("Northampton");
+    scooter1.charge = 10;
+    expect(() => {
       scooter1.rent();
-      expect(scooter1.station).toBe(null);
-      expect(scooter1.user).toBe(user3);
-    });
-    //requestRepair method
-    test("throw error if broken", () => {
-      this.isBroken = true;
-      expect(() => {
-        scooter1.rent();
-      }).toThrowError(new Error("scooter need repair"));
-    });
-    //charge method
-    test("throw error if need charge", () => {
-      this.charge < 20;
-      expect(() => {
-        scooter1.rent();
-      }).toThrowError(new Error("scooter needs to charge"));
-    });
-    //test dock
-    // test("test dock()", () => {
-    //   scooter1.user(user3);
-    //   scooter1.dock("Old Stratford");
-    //   expect(scooter1.user).toBe(null);
-    // });
+    }).toThrowError(new Error("scooter needs to charge"));
+  });
+  //test dock
+  test("test dock()", () => {
+    const scooter1 = new Scooter("Northampton");
+    scooter1.user = User;
+    scooter1.station = null;
+    scooter1.dock("Northampton");
+    expect(scooter1.user).toBe(null);
+    expect(scooter1.station).toBe("Northampton");
   });
 });
